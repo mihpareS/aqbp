@@ -1,0 +1,14 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: aqbp-portal
+
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+
+    loadbalancer:
+      ribbon:
+        enabled: false
