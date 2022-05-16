@@ -1,4 +1,4 @@
-package io.sutsaehpeh.aqbp.portal.web.aop;
+package io.sutsaehpeh.aqbp.web.web.aop;
 
 import io.sutsaehpeh.aqbp.common.response.ApiResult;
 import lombok.extern.slf4j.Slf4j;

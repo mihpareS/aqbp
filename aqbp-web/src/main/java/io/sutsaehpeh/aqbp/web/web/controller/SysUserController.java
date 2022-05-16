@@ -1,8 +1,8 @@
-package io.sutsaehpeh.aqbp.portal.web.controller;
+package io.sutsaehpeh.aqbp.web.web.controller;
 
 import io.sutsaehpeh.aqbp.common.page.Page;
 import io.sutsaehpeh.aqbp.common.response.ApiResult;
-import io.sutsaehpeh.aqbp.portal.sysuser.service.SysUserService;
+import io.sutsaehpeh.aqbp.web.sysuser.service.SysUserService;
 import io.sutsaehpeh.aqbp.user.request.UserListRequest;
 import io.sutsaehpeh.aqbp.user.request.UserPageRequest;
 import io.sutsaehpeh.aqbp.user.request.UserRegisterRequest;

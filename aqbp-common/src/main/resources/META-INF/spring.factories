@@ -1,1 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoconfiguration=io.sutsaehpeh.aqbp.config.RedisConfig
+org.springframework.boot.autoconfigure.EnableAutoconfiguration=io.sutsaehpeh.aqbp.config.RedissonConfig

@@ -1,4 +1,4 @@
-package io.sutsaehpeh.aqbp.portal.config;
+package io.sutsaehpeh.aqbp.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

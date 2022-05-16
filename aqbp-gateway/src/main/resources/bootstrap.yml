@@ -26,9 +26,9 @@ spring:
           filters:
             - StripPrefix=1
 
-        - id: aqbp-api
-          uri: lb://aqbp-api
+        - id: aqbp-web
+          uri: lb://aqbp-web
           predicates:
-            - Path=/aqbp-api/**
+            - Path=/aqbp-web/**
           filters:
             - StripPrefix=1

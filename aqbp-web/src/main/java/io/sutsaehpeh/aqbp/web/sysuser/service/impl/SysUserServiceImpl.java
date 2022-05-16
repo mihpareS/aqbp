@@ -1,9 +1,9 @@
-package io.sutsaehpeh.aqbp.portal.sysuser.service.impl;
+package io.sutsaehpeh.aqbp.web.sysuser.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import io.sutsaehpeh.aqbp.common.page.Page;
 import io.sutsaehpeh.aqbp.common.response.ApiResult;
-import io.sutsaehpeh.aqbp.portal.sysuser.service.SysUserService;
+import io.sutsaehpeh.aqbp.web.sysuser.service.SysUserService;
 import io.sutsaehpeh.aqbp.user.api.SysUserRpcApi;
 import io.sutsaehpeh.aqbp.user.dto.SysUserDTO;
 import io.sutsaehpeh.aqbp.user.request.UserListRequest;

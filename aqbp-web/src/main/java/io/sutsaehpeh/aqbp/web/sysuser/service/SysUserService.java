@@ -1,4 +1,4 @@
-package io.sutsaehpeh.aqbp.portal.sysuser.service;
+package io.sutsaehpeh.aqbp.web.sysuser.service;
 
 import io.sutsaehpeh.aqbp.common.page.Page;
 import io.sutsaehpeh.aqbp.common.response.ApiResult;

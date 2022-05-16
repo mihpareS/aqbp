@@ -1,5 +1,9 @@
-./**/build
 .gradle
-./**/bin
 .idea
+.vscode
+/**/build
+/**/bin
+/**/resources/application-prod.yml
+/**/resources/bootstrap-prod.yml
+/**/resources/redisson-prod.yml
 

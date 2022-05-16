@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface SysUserHierRepository {
 
+    SysUser findUserByUsernameOrEmail(UserQueryCondition query);
+
     SysUser findUserPrecisely(UserQueryCondition query);
 
     List<SysUser> queryUserList(UserQueryCondition query);

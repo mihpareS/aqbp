@@ -25,6 +25,8 @@ val springfoxVersion: String = "3.0.0"
 
 val swaggerUIVersion: String = "3.0.0"
 
+val redissonVersion: String = "3.17.1"
+
 apply(plugin = "java")
 
 
@@ -75,6 +77,9 @@ subprojects {
             dependency("io.springfox:springfox-boot-starter:${springfoxVersion}")
 
             dependency("io.springfox:springfox-swagger-ui:${swaggerUIVersion}")
+
+            dependency("org.redisson:redisson:${redissonVersion}")
+
         }
     }
 

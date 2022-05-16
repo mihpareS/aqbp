@@ -6,6 +6,7 @@ import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
+@Component
 public class RedisClient {
 
     @Autowired
@@ -26,9 +28,9 @@ public class RedisClient {
         return redisTemplate;
     }
 
-    public <T> void set(String key, T value, Long timeOfSec) {
-        if (ObjectUtil.isNotNull(timeOfSec) && timeOfSec > 0L) {
-            this.redisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(value), timeOfSec);
+    public <T> void set(String key, T value, Long timeout, TimeUnit unit) {
+        if (ObjectUtil.isNotNull(timeout) && timeout > 0L) {
+            this.redisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(value), timeout, unit);
         }
     }
 

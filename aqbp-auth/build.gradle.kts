@@ -12,7 +12,13 @@ dependencies {
 
     implementation("org.springframework.cloud:spring-cloud-starter-zookeeper-discovery")
 
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+    implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
+
     implementation("org.springframework.cloud:spring-cloud-starter-security")
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    implementation("cn.hutool:hutool-jwt")
 }

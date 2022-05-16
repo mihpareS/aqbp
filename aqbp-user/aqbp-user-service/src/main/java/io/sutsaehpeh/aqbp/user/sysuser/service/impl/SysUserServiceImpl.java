@@ -7,10 +7,7 @@ import io.sutsaehpeh.aqbp.common.exception.BusinessException;
 import io.sutsaehpeh.aqbp.common.page.Page;
 import io.sutsaehpeh.aqbp.common.status.StatusCode;
 import io.sutsaehpeh.aqbp.user.dto.SysUserDTO;
-import io.sutsaehpeh.aqbp.user.request.UserListRequest;
-import io.sutsaehpeh.aqbp.user.request.UserPageRequest;
-import io.sutsaehpeh.aqbp.user.request.UserPreciseRequest;
-import io.sutsaehpeh.aqbp.user.request.UserRegisterRequest;
+import io.sutsaehpeh.aqbp.user.request.*;
 import io.sutsaehpeh.aqbp.user.sysuser.dao.SysUserRepository;
 import io.sutsaehpeh.aqbp.user.sysuser.dao.query.UserQueryCondition;
 import io.sutsaehpeh.aqbp.user.sysuser.entity.SysUser;
@@ -51,6 +48,13 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SysUserDTO findUserById(Long id) {
         SysUser user = sysUserRepository.findById(id).orElseThrow(() -> new BusinessException(StatusCode.USER_NOT_EXISTS));
+        return mapper.sysUserEntity2Dto(user);
+    }
+
+    @Override
+    public SysUserDTO findUserByUsernameOrEmail(UserLoadByFuzzyRequest request) {
+        UserQueryCondition condition = BeanUtil.copyProperties(request, UserQueryCondition.class);
+        SysUser user = sysUserRepository.findUserByUsernameOrEmail(condition);
         return mapper.sysUserEntity2Dto(user);
     }
 

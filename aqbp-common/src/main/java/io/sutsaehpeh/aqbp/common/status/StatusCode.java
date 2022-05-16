@@ -12,6 +12,10 @@ public enum StatusCode {
     REGISTER_EMAIL_ILLEGAL("A0004", "email illegal", "email illegal"),
     USER_NOT_EXISTS("A0010", "user not exists", "user not exists"),
 
+    USERNAME_OR_PASSWORD_INCORRECT("A0011", "username or password incorrect", "username or password incorrect"),
+
+    EMAIL_OR_PASSWORD_INCORRECT("A0012", "email or password incorrect", "email or password incorrect"),
+
     SYSTEM_EXECUTION_ERROR("B0001", "system execution error", "system error"),
     REMOTE_INVOKE_ERROR("C0001", "remote invocation error", "remote error"),
     ;

@@ -10,6 +10,8 @@ public class UserQueryCondition {
 
     private Long userId;
 
+    private String queryString;
+
     private String username;
 
     private String password;

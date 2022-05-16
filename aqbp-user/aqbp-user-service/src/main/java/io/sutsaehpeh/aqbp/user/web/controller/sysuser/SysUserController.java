@@ -3,10 +3,7 @@ package io.sutsaehpeh.aqbp.user.web.controller.sysuser;
 import io.sutsaehpeh.aqbp.common.page.Page;
 import io.sutsaehpeh.aqbp.common.response.ApiResult;
 import io.sutsaehpeh.aqbp.user.dto.SysUserDTO;
-import io.sutsaehpeh.aqbp.user.request.UserListRequest;
-import io.sutsaehpeh.aqbp.user.request.UserPageRequest;
-import io.sutsaehpeh.aqbp.user.request.UserPreciseRequest;
-import io.sutsaehpeh.aqbp.user.request.UserRegisterRequest;
+import io.sutsaehpeh.aqbp.user.request.*;
 import io.sutsaehpeh.aqbp.user.sysuser.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,11 @@ public class SysUserController {
     @GetMapping("/{id}")
     public ApiResult<SysUserDTO> findUserById(@PathVariable("id") Long id) {
         return ApiResult.ok(sysUserService.findUserById(id));
+    }
+
+    @PostMapping("/find-by-username")
+    public ApiResult<SysUserDTO> findUserByUsernameOrEmail(@RequestBody UserLoadByFuzzyRequest request) {
+        return ApiResult.ok(sysUserService.findUserByUsernameOrEmail(request));
     }
 
     @PostMapping("/precise")

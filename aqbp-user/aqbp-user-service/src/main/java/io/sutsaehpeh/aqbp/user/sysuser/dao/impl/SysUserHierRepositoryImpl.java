@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import com.blazebit.persistence.CriteriaBuilderFactory;
 import com.blazebit.persistence.PagedList;
 import com.blazebit.persistence.querydsl.BlazeJPAQuery;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Predicate;
@@ -33,6 +34,18 @@ public class SysUserHierRepositoryImpl implements SysUserHierRepository {
     @Autowired
     private CriteriaBuilderFactory criteriaBuilderFactory;
 
+
+    @Override
+    public SysUser findUserByUsernameOrEmail(UserQueryCondition condition) {
+        String queryString = condition.getQueryString();
+        Predicate usernamePredicate = QSysUser.sysUser.username.eq(queryString);
+        Predicate emailPredicate = QSysUser.sysUser.email.eq(queryString);
+        BlazeJPAQuery<SysUser> query = new BlazeJPAQuery<>(entityManager, criteriaBuilderFactory)
+                .select(QSysUser.sysUser)
+                .from(QSysUser.sysUser);
+        return query.where(ExpressionUtils.or(usernamePredicate, emailPredicate))
+                .fetchOne();
+    }
 
     @Override
     public SysUser findUserPrecisely(UserQueryCondition condition) {
