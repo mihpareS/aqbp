@@ -2,6 +2,7 @@ package io.sutsaehpeh.aqbp.auth.config.filter;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import io.sutsaehpeh.aqbp.auth.model.AuthUser;
 import io.sutsaehpeh.aqbp.auth.service.TokenService;
 import io.sutsaehpeh.aqbp.common.constant.SystemConst;
 import io.sutsaehpeh.aqbp.common.model.LoginUser;
@@ -32,8 +33,9 @@ public class TokenFilter extends OncePerRequestFilter {
         }
         LoginUser user = tokenService.getLoginUser(accessToken);
         if (ObjectUtil.isNotNull(user.getUserId())) {
+            AuthUser authUser = new AuthUser(user);
             UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(user, null, null);
+                    new UsernamePasswordAuthenticationToken(authUser, null, null);
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
         filterChain.doFilter(request, response);
