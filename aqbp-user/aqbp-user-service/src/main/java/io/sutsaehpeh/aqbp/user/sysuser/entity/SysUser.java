@@ -1,8 +1,12 @@
 package io.sutsaehpeh.aqbp.user.sysuser.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,9 +16,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name = "aqbp_user")
-@DynamicInsert
 public class SysUser {
 
     @Id
@@ -43,9 +48,6 @@ public class SysUser {
     @Column(name = "user_type")
     private Integer userType;
 
-    @Column(name = "register_date")
-    private Date registerDate;
-
     @Column(name = "gmt_created")
     private Date gmtCreated;
 
@@ -53,7 +55,7 @@ public class SysUser {
     private Date gmtModified;
 
     @Column(name = "delete_flag")
-    private Integer deleteFlag;
+    private Long deleteFlag;
 
     @Override
     public boolean equals(Object o) {

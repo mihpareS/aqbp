@@ -7,7 +7,8 @@ import io.sutsaehpeh.aqbp.common.exception.BusinessException;
 import io.sutsaehpeh.aqbp.common.page.Page;
 import io.sutsaehpeh.aqbp.common.status.StatusCode;
 import io.sutsaehpeh.aqbp.user.dto.SysUserDTO;
-import io.sutsaehpeh.aqbp.user.request.*;
+import io.sutsaehpeh.aqbp.user.request.sysuser.UserPageRequest;
+import io.sutsaehpeh.aqbp.user.request.sysuser.UserRegisterRequest;
 import io.sutsaehpeh.aqbp.user.sysuser.dao.SysUserRepository;
 import io.sutsaehpeh.aqbp.user.sysuser.dao.query.UserQueryCondition;
 import io.sutsaehpeh.aqbp.user.sysuser.entity.SysUser;
@@ -52,24 +53,11 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public SysUserDTO findUserByUsernameOrEmail(UserLoadByFuzzyRequest request) {
-        UserQueryCondition condition = BeanUtil.copyProperties(request, UserQueryCondition.class);
+    public SysUserDTO findUserByUsernameOrEmail(String queryString) {
+        UserQueryCondition condition = new UserQueryCondition();
+        condition.setQueryString(queryString);
         SysUser user = sysUserRepository.findUserByUsernameOrEmail(condition);
         return mapper.sysUserEntity2Dto(user);
-    }
-
-    @Override
-    public SysUserDTO findUserPrecisely(UserPreciseRequest request) {
-        UserQueryCondition condition = BeanUtil.copyProperties(request, UserQueryCondition.class);
-        SysUser user = sysUserRepository.findUserPrecisely(condition);
-        return mapper.sysUserEntity2Dto(user);
-    }
-
-    @Override
-    public List<SysUserDTO> queryUserList(UserListRequest request) {
-        UserQueryCondition query = BeanUtil.copyProperties(request, UserQueryCondition.class);
-        List<SysUser> users = sysUserRepository.queryUserList(query);
-        return mapper.userEntities2Dto(users);
     }
 
     @Override

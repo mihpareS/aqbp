@@ -1,4 +1,4 @@
-package io.sutsaehpeh.aqbp.user.request;
+package io.sutsaehpeh.aqbp.user.request.sysuser;
 
 import cn.hutool.core.util.StrUtil;
 import io.sutsaehpeh.aqbp.common.exception.BusinessException;

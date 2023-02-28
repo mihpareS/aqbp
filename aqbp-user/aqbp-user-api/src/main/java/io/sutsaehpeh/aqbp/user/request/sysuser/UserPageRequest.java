@@ -1,12 +1,11 @@
-package io.sutsaehpeh.aqbp.user.request;
+package io.sutsaehpeh.aqbp.user.request.sysuser;
 
-import io.sutsaehpeh.aqbp.common.page.Sort;
 import lombok.Data;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class UserPageRequest implements Serializable {
@@ -14,10 +13,8 @@ public class UserPageRequest implements Serializable {
     private String username;
 
     private String email;
-
-    private Date registerStartDate;
-
-    private Date registerEndDate;
+    
+    private List<Date> date;
 
     private Integer pageSize;
 

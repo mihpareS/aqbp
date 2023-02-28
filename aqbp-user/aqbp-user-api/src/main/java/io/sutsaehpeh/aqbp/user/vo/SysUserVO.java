@@ -22,8 +22,6 @@ public class SysUserVO implements Serializable {
 
     private Integer userType;
 
-    private Date registerDate;
-
     private Date gmtCreated;
 
     private Date gmtModified;

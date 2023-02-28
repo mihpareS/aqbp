@@ -48,60 +48,17 @@ public class SysUserHierRepositoryImpl implements SysUserHierRepository {
     }
 
     @Override
-    public SysUser findUserPrecisely(UserQueryCondition condition) {
-        List<Predicate> predicates = new ArrayList<>();
-        if (StrUtil.isNotBlank(condition.getUsername())) {
-            predicates.add(QSysUser.sysUser.username.eq(condition.getUsername()));
-        }
-        if (StrUtil.isNotBlank(condition.getEmail())) {
-            predicates.add(QSysUser.sysUser.email.eq(condition.getEmail()));
-        }
-        if (CollectionUtil.isEmpty(predicates)) {
-            return new SysUser();
-        }
-        BlazeJPAQuery<SysUser> query = new BlazeJPAQuery<>(entityManager, criteriaBuilderFactory)
-                .select(QSysUser.sysUser)
-                .from(QSysUser.sysUser);
-        return query.where(predicates.toArray(new Predicate[0]))
-                .fetchOne();
-    }
-
-
-    @Override
-    public List<SysUser> queryUserList(UserQueryCondition condition) {
-        Long userId = condition.getUserId();
-        String username = condition.getUsername();
-        String email = condition.getEmail();
-        Date startDate = condition.getRegisterStartDate();
-        Date endDate = condition.getRegisterEndDate();
-        BlazeJPAQuery<SysUser> query = new BlazeJPAQuery<>(entityManager, criteriaBuilderFactory)
-                .select(QSysUser.sysUser).from(QSysUser.sysUser);
-        List<Predicate> predicates = new ArrayList<>();
-        if (ObjectUtil.isNotNull(userId)) {
-            predicates.add(QSysUser.sysUser.userId.eq(userId));
-        }
-        if (StrUtil.isNotBlank(username)) {
-            predicates.add(QSysUser.sysUser.username.startsWith(username));
-        }
-        if (StrUtil.isNotBlank(email)) {
-            predicates.add(QSysUser.sysUser.email.startsWith(email));
-        }
-        if (ObjectUtil.isNotNull(startDate) && ObjectUtil.isNotNull(endDate)) {
-            predicates.add(QSysUser.sysUser.registerDate.between(startDate, endDate));
-        }
-        return query.where(
-                        predicates.toArray(new Predicate[0])
-                )
-                .fetch();
-    }
-
-    @Override
     public PagedList<SysUser> queryUserPage(UserQueryCondition condition) {
         Long userId = condition.getUserId();
         String username = condition.getUsername();
         String email = condition.getEmail();
-        Date startDate = condition.getRegisterStartDate();
-        Date endDate = condition.getRegisterEndDate();
+        List<Date> dates = condition.getDates();
+        Date startDate = null;
+        Date endDate = null;
+        if (CollectionUtil.isNotEmpty(dates) && dates.size() > 1) {
+            startDate = dates.get(0);
+            endDate = dates.get(1);
+        }
         Integer pageNumber = condition.getPageNumber();
         Integer pageSize = condition.getPageSize();
         List<String> sortBy = condition.getSortBy();
@@ -126,7 +83,7 @@ public class SysUserHierRepositoryImpl implements SysUserHierRepository {
             predicates.add(QSysUser.sysUser.email.startsWith(email));
         }
         if (ObjectUtil.isNotNull(startDate) && ObjectUtil.isNotNull(endDate)) {
-            predicates.add(QSysUser.sysUser.registerDate.between(startDate, endDate));
+            predicates.add(QSysUser.sysUser.gmtCreated.between(startDate, endDate));
         }
         List<OrderSpecifier<?>> specifiers = new ArrayList<>();
         if (ObjectUtil.isNull(sortBy) || CollectionUtil.isEmpty(sortBy)) {

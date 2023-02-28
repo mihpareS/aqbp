@@ -3,31 +3,24 @@ package io.sutsaehpeh.aqbp.user.api;
 import io.sutsaehpeh.aqbp.common.page.Page;
 import io.sutsaehpeh.aqbp.common.response.ApiResult;
 import io.sutsaehpeh.aqbp.user.dto.SysUserDTO;
-import io.sutsaehpeh.aqbp.user.request.*;
+import io.sutsaehpeh.aqbp.user.request.sysuser.UserPageRequest;
+import io.sutsaehpeh.aqbp.user.request.sysuser.UserRegisterRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "aqbp-user")
 public interface SysUserRpcApi {
 
-    @PostMapping("/sysuser/create")
+    @PostMapping("/sysusers/")
     ApiResult<SysUserDTO> createUser(@RequestBody UserRegisterRequest request);
 
-    @GetMapping("/sysuser/{id}")
+    @GetMapping("/sysusers/{id}")
     ApiResult<SysUserDTO> findById(@PathVariable("id") Long id);
 
-    @PostMapping("/sysuser/find-by-username")
-    ApiResult<SysUserDTO> findByUsernameOrEmail(@RequestBody UserLoadByFuzzyRequest request);
+    @GetMapping("/sysusers/queryByLogin")
+    ApiResult<SysUserDTO> findByUsernameOrEmail(@RequestParam("query") String query);
 
-    @PostMapping("/sysuser")
-    ApiResult<List<SysUserDTO>> queryUserList(@RequestBody UserListRequest request);
-
-    @GetMapping("/sysuser")
+    @GetMapping("/sysusers")
     ApiResult<Page<SysUserDTO>> queryUserPage(@SpringQueryMap UserPageRequest request);
 }

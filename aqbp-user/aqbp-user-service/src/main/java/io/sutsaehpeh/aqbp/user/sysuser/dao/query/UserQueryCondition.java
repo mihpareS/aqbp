@@ -22,9 +22,7 @@ public class UserQueryCondition {
 
     private Integer userStatus;
 
-    private Date registerStartDate;
-
-    private Date registerEndDate;
+    private List<Date> dates;
 
     private Date gmtCreated;
 

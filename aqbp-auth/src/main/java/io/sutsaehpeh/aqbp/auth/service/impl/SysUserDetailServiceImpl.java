@@ -9,7 +9,6 @@ import io.sutsaehpeh.aqbp.common.response.ApiResult;
 import io.sutsaehpeh.aqbp.common.status.StatusCode;
 import io.sutsaehpeh.aqbp.user.api.SysUserRpcApi;
 import io.sutsaehpeh.aqbp.user.dto.SysUserDTO;
-import io.sutsaehpeh.aqbp.user.request.UserLoadByFuzzyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,9 +22,7 @@ public class SysUserDetailServiceImpl implements SysUserDetailService {
 
     @Override
     public UserDetails loadUserByUsername(String queryString) throws UsernameNotFoundException {
-        UserLoadByFuzzyRequest request = new UserLoadByFuzzyRequest();
-        request.setQueryString(queryString);
-        ApiResult<SysUserDTO> apiResult = sysUserRpcApi.findByUsernameOrEmail(request);
+        ApiResult<SysUserDTO> apiResult = sysUserRpcApi.findByUsernameOrEmail(queryString);
         if (!apiResult.isSuccess()) {
             throw new BusinessException(StatusCode.USER_NOT_EXISTS);
         }

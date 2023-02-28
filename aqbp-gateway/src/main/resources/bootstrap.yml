@@ -5,6 +5,13 @@ spring:
   application:
     name: aqbp-gateway
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9001/publickey
+
+
   cloud:
     loadbalancer:
       ribbon:
@@ -12,6 +19,7 @@ spring:
 
     zookeeper:
       connect-string: localhost:2181
+
 
     gateway:
       discovery:
@@ -26,9 +34,9 @@ spring:
           filters:
             - StripPrefix=1
 
-        - id: aqbp-web
-          uri: lb://aqbp-web
+        - id: aqbp-portal
+          uri: lb://aqbp-portal
           predicates:
-            - Path=/aqbp-web/**
+            - Path=/aqbp-portal/**
           filters:
             - StripPrefix=1

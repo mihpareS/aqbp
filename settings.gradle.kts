@@ -9,6 +9,7 @@ rootProject.name = "aqbp"
 include(":aqbp-common")
 include(":aqbp-auth")
 include(":aqbp-gateway")
+include(":aqbp-admin")
 include(":aqbp-user:aqbp-user-api")
 include(":aqbp-user:aqbp-user-service")
 include(":aqbp-web")

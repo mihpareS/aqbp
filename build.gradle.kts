@@ -1,6 +1,6 @@
 plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    java
+    id("java")
 }
 
 val springBootVersion: String = "2.3.12.RELEASE"
@@ -27,12 +27,13 @@ val swaggerUIVersion: String = "3.0.0"
 
 val redissonVersion: String = "3.17.1"
 
-apply(plugin = "java")
+subprojects {
 
-
-allprojects {
     group = "io.sutsaehpeh"
+
     version = "1.0-SNAPSHOT"
+
+    apply(plugin = "java")
 
     apply(plugin = "io.spring.dependency-management")
 
@@ -42,45 +43,6 @@ allprojects {
         mavenCentral()
 
         mavenLocal()
-    }
-
-}
-
-subprojects {
-
-    apply(plugin = "java")
-
-    apply(plugin = "idea")
-
-
-    dependencyManagement {
-        imports {
-
-            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-
-            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
-
-            mavenBom("cn.hutool:hutool-bom:${hutoolVersion}")
-        }
-
-        dependencies{
-            dependency("com.alibaba:druid-spring-boot-starter:${druidVersion}")
-
-            dependency("mysql:mysql-connector-java:${mysqlVersion}")
-
-            dependency("org.projectlombok:lombok:${lombokVersion}")
-
-            dependency("org.mapstruct:mapstruct:${mapStructVersion}")
-
-            dependency("org.mapstruct:mapstruct-processor:${mapStructVersion}")
-
-            dependency("io.springfox:springfox-boot-starter:${springfoxVersion}")
-
-            dependency("io.springfox:springfox-swagger-ui:${swaggerUIVersion}")
-
-            dependency("org.redisson:redisson:${redissonVersion}")
-
-        }
     }
 
     dependencies {
@@ -144,6 +106,38 @@ subprojects {
 
         annotationProcessor("org.mapstruct:mapstruct-processor")
     }
+
+    dependencyManagement {
+        imports {
+
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+
+            mavenBom("cn.hutool:hutool-bom:${hutoolVersion}")
+        }
+
+        dependencies{
+            dependency("com.alibaba:druid-spring-boot-starter:${druidVersion}")
+
+            dependency("mysql:mysql-connector-java:${mysqlVersion}")
+
+            dependency("org.projectlombok:lombok:${lombokVersion}")
+
+            dependency("org.mapstruct:mapstruct:${mapStructVersion}")
+
+            dependency("org.mapstruct:mapstruct-processor:${mapStructVersion}")
+
+            dependency("io.springfox:springfox-boot-starter:${springfoxVersion}")
+
+            dependency("io.springfox:springfox-swagger-ui:${swaggerUIVersion}")
+
+            dependency("org.redisson:redisson:${redissonVersion}")
+
+        }
+    }
+
+
 
     tasks.getByName<Test>("test") {
         useJUnitPlatform()
